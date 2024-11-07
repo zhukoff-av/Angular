@@ -3,7 +3,9 @@
 
 <h1 class="py4 px-6 font-bold mb-2 text-center">{{ title | titlecase}}</h1>
 
-<app-product
+  <p *ngIf="loading" class="text-center text-lg font-semibold text-gray-600">Loading...</p>
+
+  <app-product
   *ngFor="let product of products; let i = index"
   [product]="product"
 ></app-product>

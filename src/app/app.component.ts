@@ -17,14 +17,17 @@ import {ProductService} from './components/product/product/product.services';
 export class AppComponent implements OnInit {
   title = 'angular-crash-project';
   products: IProduct[] = [];
+  loading = false;
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.productService.getAll().subscribe((products: IProduct[]) => {
-      // console.log(products);
       this.products = products
+      this.loading = false;
+      // DEBUG
       // this.products = products.map((product) => {
       //   return {
       //     ...product,
