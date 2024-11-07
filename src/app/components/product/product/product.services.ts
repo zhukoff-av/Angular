@@ -16,13 +16,13 @@ export class ProductService {
   }
 
   getAll(): Observable<IProduct[]> {
-    const apiUrl = 'https://fakestoreapi.com/products[1]';
+    const apiUrl = 'https://fakestoreapi.com/products';
     return this.http.get<IProduct[]>(apiUrl, {
       params: {
         limit: '5'
       }
     }).pipe(
-      delay(2000),
+      delay(100),
       retry(3),
       catchError(this.errorHandler.bind(this)));
   }
