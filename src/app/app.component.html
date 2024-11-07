@@ -1,13 +1,14 @@
-
+<app-error></app-error>
 <div class="max-w-2xl container mx-auto pt-5">
 
-<h1 class="py4 px-6 font-bold mb-2 text-center">{{ title | titlecase}}</h1>
+  <h1 class="py4 px-6 font-bold mb-2 text-center">{{ title | titlecase}}</h1>
 
   <p *ngIf="loading" class="text-center text-lg font-semibold text-gray-600">Loading...</p>
 
-  <app-product
-  *ngFor="let product of products; let i = index"
-  [product]="product"
-></app-product>
-
+  <div class="product-grid">
+    <app-product
+      *ngFor="let product of $products | async; let i = index"
+      [product]="product"
+    ></app-product>
+  </div>
 </div>
