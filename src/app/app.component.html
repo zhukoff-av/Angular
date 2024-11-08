@@ -1,13 +1,29 @@
 <app-error></app-error>
+
 <div class="max-w-2xl container mx-auto pt-5">
 
   <h1 class="py4 px-6 font-bold mb-2 text-center">{{ title | titlecase}}</h1>
+  <input
+    type="text"
+    placeholder="Search for products..."
+    class="w-full px-4 py-2 mb-4 border border-gray-300 rounded"
+    [(ngModel)]="term"
+  >
 
   <p *ngIf="loading" class="text-center text-lg font-semibold text-gray-600">Loading...</p>
 
-  <div class="product-grid">
+  <app-modal *ngIf="modalService.isVisible$" (close)="closeModal()" title="Create new product">
+    <app-create-product></app-create-product>
+  </app-modal>
+
+  <button
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    (click)="modalService.open()">Create new Product
+  </button>
+
+  <div *ngIf="$products | async as products" class="product-grid">
     <app-product
-      *ngFor="let product of $products | async; let i = index"
+      *ngFor="let product of products | filterProducts: term; let i = index"
       [product]="product"
     ></app-product>
   </div>
