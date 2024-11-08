@@ -3,7 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {AsyncPipe, NgForOf, NgIf, TitleCasePipe} from '@angular/common';
 import {ProductComponent} from './components/product/product/product.component';
 import {IProduct} from './models/product'
-import {ProductService} from './components/product/product/product.services';
+import {ProductService} from './services/product.services';
 import {finalize, Observable, tap} from 'rxjs';
 import {ErrorComponent} from './components/error/error.component';
 import {FormsModule} from '@angular/forms';
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   term: '';
 
   constructor(
-    private productService: ProductService,
+    public productService: ProductService,
     public modalService: ModalService) {
   }
 
@@ -45,21 +45,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.$products = this.productService.getAll().pipe(
-      finalize(() => this.loading = false
-      ));
+    // this.$products = this.productService.getAll()
+    //   .pipe(
+    //     tap(() => this.loading = false
+    //     ));
 
-    // this.productService.getAll().subscribe((products: IProduct[]) => {
-    //   this.products = products
-    //   this.loading = false;
-    //
-    //   // DEBUG
-    //   // this.products = products.map((product) => {
-    //   //   return {
-    //   //     ...product,
-    //   //     name: product.title ? product.title.toLowerCase() : ''
-    //   //   };
-    //   // });
-    // });
+    this.productService.getAll().subscribe(() => {
+      this.loading = false;
+    })
   }
+
 }
