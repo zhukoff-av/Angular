@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgIf, TitleCasePipe} from '@angular/common';
 import {ModalService} from '../../services/modal.service';
 import {Subscription} from 'rxjs';
@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit {
   }
 
   @Input() title: string
-  @Output() close = new EventEmitter<void>()
+  // @Output() close = new EventEmitter<void>()
 
   isVisible = false;
   private subscription: Subscription;
@@ -30,13 +30,13 @@ export class ModalComponent implements OnInit {
     });
   }
 
+  openModal() {
+    this.isVisible = true;
+  }
+
   onClose() {
-    this.close.emit();
     this.modalService.close(); // Ensures modal is hidden
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
 }

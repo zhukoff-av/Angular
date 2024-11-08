@@ -1,10 +1,9 @@
 <div class="modal" *ngIf="isVisible"
      (click)="modalService.close()">
-  <div class="modal-content">
+  <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="onClose()">&times;</span>
 
     <h1 class="text-center mb-2 text-lg">{{ title | titlecase}}</h1>
-<!--    <input type="text" minlength="3" placeholder="Enter at least 3 characters" />-->
     <ng-content></ng-content>
   </div>
 </div>
