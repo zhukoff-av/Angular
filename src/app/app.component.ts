@@ -11,48 +11,18 @@ import {FilterProductsPipe} from './pipes/filter-products.pipe';
 import {ModalComponent} from './components/modal/modal.component';
 import {CreateProductComponent} from './components/create-product/create-product.component';
 import {ModalService} from './services/modal.service';
+import {NavigationComponent} from './components/navigation/navigation.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, TitleCasePipe, ProductComponent, NgForOf, NgIf, AsyncPipe, ErrorComponent, FormsModule, FilterProductsPipe,
-    ModalComponent, CreateProductComponent],
+    ModalComponent, CreateProductComponent, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent implements OnInit {
-  title = 'angular-crash-project';
-  $products: Observable<IProduct[]>;
-  loading = false;
-  term: '';
+export class AppComponent {
 
-  constructor(
-    public productService: ProductService,
-    public modalService: ModalService) {
-  }
-
-  isModalVisible = false;
-
-  openModal() {
-    this.modalService.open()
-  }
-
-  closeModal() {
-    this.modalService.close()
-  }
-
-  ngOnInit(): void {
-    this.loading = true;
-
-    // this.$products = this.productService.getAll()
-    //   .pipe(
-    //     tap(() => this.loading = false
-    //     ));
-
-    this.productService.getAll().subscribe(() => {
-      this.loading = false;
-    })
-  }
 
 }
