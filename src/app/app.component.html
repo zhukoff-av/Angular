@@ -12,6 +12,8 @@
 
   <p *ngIf="loading" class="text-center text-lg font-semibold text-gray-600">Loading...</p>
 
+<!--hide modal-->
+  <!--
   <app-modal *ngIf="modalService.isVisible$" (close)="closeModal()" title="Create new product">
     <app-create-product></app-create-product>
   </app-modal>
@@ -20,6 +22,7 @@
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     (click)="modalService.open()">Create new Product
   </button>
+-->
 
   <div *ngIf="$products | async as products" class="product-grid">
     <app-product
